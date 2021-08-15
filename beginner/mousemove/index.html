@@ -17,6 +17,7 @@
         background-color: red;
         top: 0;
         left: 0;
+        transition: all 1s cubic-bezier(0.320, -0.295, 0.515, 1.330);
     }
   </style>
 </head>
@@ -25,16 +26,34 @@
   <div class='cursor-item'></div>
 
 <script>
+
+  const h1 = document.getElementsByTagName('h1')[0]
+  const cursor = document.getElementsByClassName('cursor-item')[0]
+  let x = 0
+  let y = 0
+  let mx = 0
+  let my = 0
+  const speed = 0.05
+
   window.onload = function () {
-    const h1 = document.getElementsByTagName('h1')[0]
-    const cursor = document.getElementsByClassName('cursor-item')[0]
     window.addEventListener('mousemove', mouseFunc, false)
 
     function mouseFunc(e) {
       const { clientX, clientY } = e
-      h1.innerHTML = `${clientX} ${clientY}`
-      cursor.style.transform = `translate(${clientX - 50}px, ${clientY - 50}px)`
+      x = clientX
+      y = clientY
+      cursor.style.transform = `translate(${x - 50}px, ${y - 50}px)`
     }
+
+    // loop()
+  }
+
+  function loop() {
+    mx += (x - mx) * speed
+    my += (y - my) * speed
+    h1.innerHTML = `${mx} ${my}`
+    cursor.style.transform = `translate(${mx - 50}px, ${my - 50}px)`
+    window.requestAnimationFrame(loop)
   }
 </script>
 
