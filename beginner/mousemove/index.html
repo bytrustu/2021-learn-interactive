@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+        position: relative;
+        background-color: black;
+        color: #fff;
+    }
+
+    .cursor-item {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        top: 0;
+        left: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test</h1>
+  <div class='cursor-item'></div>
+
+<script>
+  window.onload = function () {
+    const h1 = document.getElementsByTagName('h1')[0]
+    const cursor = document.getElementsByClassName('cursor-item')[0]
+    window.addEventListener('mousemove', mouseFunc, false)
+
+    function mouseFunc(e) {
+      const { clientX, clientY } = e
+      h1.innerHTML = `${clientX} ${clientY}`
+      cursor.style.transform = `translate(${clientX - 50}px, ${clientY - 50}px)`
+    }
+  }
+</script>
+
+</body>
+</html>
